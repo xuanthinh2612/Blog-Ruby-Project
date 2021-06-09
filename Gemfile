@@ -11,7 +11,8 @@ gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'bootstrap-sass'
-
+#add to secure password
+gem 'bcrypt', '~> 3.1.7'
 # to debug by hand and show all details to browser
 gem 'byebug'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

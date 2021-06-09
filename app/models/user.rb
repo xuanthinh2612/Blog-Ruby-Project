@@ -12,5 +12,7 @@ class User < ApplicationRecord
             length: { maximum: 105 },
             uniqueness: true,
             format: { with: VALID_EMAIL_REGEX }
+  #khai bao de su dung password secure (password_digest)
+  has_secure_password
 
 end

@@ -6,6 +6,10 @@
 import Rails from "@rails/ujs"
 import 'bootstrap-sprockets' // custom by user
 import 'bootstrap'
+//= require jquery
+//= require jquery_ujs
+import 'jquery_ujs'
+import 'jquery'
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
