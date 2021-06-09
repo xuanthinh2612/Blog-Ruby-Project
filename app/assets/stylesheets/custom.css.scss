@@ -1,0 +1,22 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$navbar-default-bg: black;
+.jumbotron {
+  background-image: asset_url('IWHdbE.jpg');
+  background-size: cover;
+  height: 550px;
+}
+
+.jumbotron h1 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: -1px ;
+  font-weight: bold;
+}
+
+.btn-xlarge {
+  font-size: 2em
+;
+}

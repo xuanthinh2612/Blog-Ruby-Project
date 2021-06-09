@@ -1,13 +1,13 @@
 class ArticlesController < ApplicationController
 
-  # before_action :get_article, only: {:show, :create,}
+  before_action :get_article, only: [:show, :edit, :update]
 
   def index
     @articles = Article.all
   end
 
   def show
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   def new
@@ -25,11 +25,11 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
     if @article.update(article_params)
       flash[:notice] = 'Successfully Updated Article'
       redirect_to article_path(@article)
@@ -48,6 +48,9 @@ class ArticlesController < ApplicationController
 
   private
 
+  def get_article
+    @article = Article.find(params[:id])
+  end
   def article_params
     params.require(:article).permit(:title, :description)
   end
