@@ -3,11 +3,13 @@ class ArticlesController < ApplicationController
   before_action :get_article, only: [:show, :edit, :update]
 
   def index
-    # @articles = Article.all.paginate(page: params[:page], per_page: 3)
-    @articles = Article.all
+    #dung de phan trang
+    @articles = Article.paginate(page: params[:page], per_page: 3)
+    # @articles = Article.all
   end
 
   def show
+    # use before action.
     # @article = Article.find(params[:id])
   end
 
@@ -53,6 +55,7 @@ class ArticlesController < ApplicationController
   def get_article
     @article = Article.find(params[:id])
   end
+
   def article_params
     params.require(:article).permit(:title, :description)
   end
