@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :require_same_user, only: [:edit, :update]
+
   def index
     #phan trang
     @users = User.all.paginate(page: params[:page], per_page: 3)
@@ -13,14 +15,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "wellcome to the blog"
-      redirect_to articles_path
+      redirect_to user_path(@user)
     else
       render 'new'
     end
   end
 
   def edit
+    require_user
     @user = User.find(params[:id])
   end
 
@@ -45,6 +49,14 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def require_same_user
+    @user = User.find(params[:id])
+    if !logged_in? || current_user != @user
+      flash[:danger] = 'your request was denied'
+      redirect_to articles_path
+    end
   end
 
 end
