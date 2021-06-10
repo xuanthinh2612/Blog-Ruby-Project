@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  before_action :get_article, only: [:show, :edit, :update]
+  before_action :get_article, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:index, :show]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
@@ -9,7 +9,6 @@ class ArticlesController < ApplicationController
     @articles = Article.paginate(page: params[:page], per_page: 3)
     # @articles = Article.all
   end
-
 
   def show
     # use before action.
@@ -47,6 +46,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+
     Article.find(params[:id]).destroy
     # redirect_to :action => 'index'
     flash[:notice] = 'Article was successfully deleted'
@@ -64,9 +64,9 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @article.user
+    if !logged_in? || (current_user != @article.user && !current_user.admin?)
       flash[:danger] = "Only can delete or edit your article"
-      redirect_to root_path
+      redirect_to
     end
   end
 end
