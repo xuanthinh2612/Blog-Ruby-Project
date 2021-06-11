@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    #dung de phan trang
+    # dung de phan trang
     @articles = Article.paginate(page: params[:page], per_page: 3)
     # @articles = Article.all
   end
@@ -60,7 +60,10 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    # muốn nhận được nhiều category cho 1 article thì để biến nhận vào là 1 mảng [].
+    # và chứa nhiều id của đối tượng đấy
+    # hoặc chứa 1 id (bên view cũng khai báo id của đối tượng category nằm trong đối tượng article)
+    params.require(:article).permit(:title, :description, category_ids: [])
   end
 
   def require_same_user

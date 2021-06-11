@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   #tao bang quan he
-  has_many :articles
+  has_many :articles,
+           dependent: :destroy #dòng này dùng để bảo rails xóa hết những bài blog của user này
   #downcase for email anytime user create an account
   before_save { self.email = email.downcase }
   validates :username, presence: true,

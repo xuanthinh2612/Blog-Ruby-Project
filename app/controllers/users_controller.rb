@@ -47,10 +47,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.articles.each { |a| a.destroy }
     @user.destroy
-
-    flash[:notice] = 'User was successfully deleted'
+    flash[:notice] = 'User and their article was successfully deleted'
     redirect_to users_path
 
   end
